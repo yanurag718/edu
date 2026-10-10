@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eduvanta Learning | Learn Today | Build Tomorrow</title>
+    <meta name="description" content="Eduvanta Learning offers live, mentor-led Cloud & DevOps, Data Analytics and Full Stack Web Development programs with hands-on labs, real projects and placement support.">
+    <meta name="theme-color" content="#4C1D95">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Eduvanta Learning | Learn Today | Build Tomorrow">
+    <meta property="og:description" content="Live mentor-led Cloud, Data and Full Stack programs with real projects and placement support.">
+    <meta property="og:image" content="assets/hero-student.jpg">
+    <link rel="icon" href="assets/eduvanta-logo.jpg">
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -65,6 +72,34 @@
         /* Custom scrollbar for module tabs */
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Tech stack marquee */
+        .marquee { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+        .marquee-track { display: flex; align-items: center; gap: 3.5rem; width: max-content; animation: marquee 36s linear infinite; }
+        .marquee:hover .marquee-track { animation-play-state: paused; }
+        @keyframes marquee { to { transform: translateX(-50%); } }
+
+        /* Learning journey connector (desktop) */
+        @media (min-width: 1024px) {
+            .journey-line::before { content: ""; position: absolute; top: 28px; left: 10%; right: 10%; height: 2px; background: repeating-linear-gradient(90deg, rgba(255,255,255,.35) 0 8px, transparent 8px 16px); }
+        }
+
+        /* Floating contact buttons */
+        .float-btn { box-shadow: 0 10px 25px -8px rgba(0,0,0,.35); }
+
+        /* FAQ chevron */
+        details.faq[open] summary .faq-icon { transform: rotate(45deg); }
+        details.faq summary::-webkit-details-marker { display: none; }
+
+        :focus-visible { outline: 3px solid #FF6B00; outline-offset: 2px; }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .marquee-track { animation: none; flex-wrap: wrap; width: auto; justify-content: center; row-gap: 1.5rem; }
+            .marquee-dup { display: none; }
+            .marquee { -webkit-mask-image: none; mask-image: none; }
+            .animate-ping, .animate-fade-in { animation: none !important; }
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col selection:bg-brand-orange selection:text-white">
@@ -126,6 +161,12 @@
                     <button onclick="scrollToSection('features')" class="px-3.5 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:text-brand-purple hover:bg-slate-100 transition-all">
                         Features
                     </button>
+                    <button onclick="scrollToSection('how-it-works')" class="px-3.5 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:text-brand-purple hover:bg-slate-100 transition-all">
+                        How It Works
+                    </button>
+                    <button onclick="scrollToSection('faq')" class="px-3.5 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:text-brand-purple hover:bg-slate-100 transition-all">
+                        FAQ
+                    </button>
                     <button onclick="scrollToSection('contact')" class="px-3.5 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:text-brand-purple hover:bg-slate-100 transition-all">
                         Contact Us
                     </button>
@@ -158,6 +199,8 @@
             <button onclick="navigateTo('data'); toggleMobileMenu()" class="block w-full text-left px-6 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:bg-orange-50">Data Analytics & BI</button>
             <button onclick="navigateTo('web'); toggleMobileMenu()" class="block w-full text-left px-6 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:bg-purple-50">Full Stack Web Development</button>
             <button onclick="scrollToSection('features'); toggleMobileMenu()" class="block w-full text-left px-4 py-2.5 rounded-xl text-sm font-bold text-slate-800 hover:bg-purple-50">Features</button>
+            <button onclick="scrollToSection('how-it-works'); toggleMobileMenu()" class="block w-full text-left px-4 py-2.5 rounded-xl text-sm font-bold text-slate-800 hover:bg-purple-50">How It Works</button>
+            <button onclick="scrollToSection('faq'); toggleMobileMenu()" class="block w-full text-left px-4 py-2.5 rounded-xl text-sm font-bold text-slate-800 hover:bg-purple-50">FAQ</button>
             <button onclick="scrollToSection('contact'); toggleMobileMenu()" class="block w-full text-left px-4 py-2.5 rounded-xl text-sm font-bold text-slate-800 hover:bg-purple-50">Contact Us</button>
             <div class="pt-2 flex flex-col gap-2">
                 <button onclick="openEnrollModal(); toggleMobileMenu()" class="w-full bg-brand-orange text-white py-3 rounded-xl font-bold text-center text-sm shadow">Enroll Now</button>
@@ -197,15 +240,15 @@
                             <!-- Live Metrics -->
                             <div class="pt-8 border-t border-white/10 grid grid-cols-3 gap-4 text-center sm:text-left">
                                 <div>
-                                    <div class="text-2xl sm:text-3xl font-black text-white">1000+</div>
+                                    <div class="count-up text-2xl sm:text-3xl font-black text-white" data-target="1000" data-suffix="+">1000+</div>
                                     <div class="text-xs text-purple-200 mt-0.5">Global Graduates</div>
                                 </div>
                                 <div>
-                                    <div class="text-2xl sm:text-3xl font-black text-brand-orange">90.6%</div>
+                                    <div class="count-up text-2xl sm:text-3xl font-black text-brand-orange" data-target="90.6" data-decimals="1" data-suffix="%">90.6%</div>
                                     <div class="text-xs text-purple-200 mt-0.5">Placement Rate</div>
                                 </div>
                                 <div>
-                                    <div class="text-2xl sm:text-3xl font-black text-white">100+</div>
+                                    <div class="count-up text-2xl sm:text-3xl font-black text-white" data-target="100" data-suffix="+">100+</div>
                                     <div class="text-xs text-purple-200 mt-0.5">Hiring Partners</div>
                                 </div>
                             </div>
@@ -322,6 +365,118 @@
                 </div>
             </section>
 
+            <!-- Tech Stack Marquee -->
+            <section class="bg-white py-14 border-t border-slate-200" aria-labelledby="stack-heading">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center max-w-2xl mx-auto mb-10">
+                        <h2 id="stack-heading" class="text-2xl sm:text-3xl font-black text-slate-900">Train on the tools companies actually use</h2>
+                        <p class="text-slate-600 mt-2 text-sm sm:text-base">Every program is built around the same stack you will work with on the job.</p>
+                    </div>
+                    <div class="marquee">
+                        <div class="marquee-track">
+                        <div class="flex items-center gap-3 shrink-0">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="AWS" width="40" height="40" class="h-10 w-10 object-contain" loading="lazy">
+                            <span class="text-sm font-bold text-slate-600">AWS</span>
+                        </div>
+                        <div class="flex items-center gap-3 shrink-0">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/docker/docker-original.svg" alt="Docker" width="40" height="40" class="h-10 w-10 object-contain" loading="lazy">
+                            <span class="text-sm font-bold text-slate-600">Docker</span>
+                        </div>
+                        <div class="flex items-center gap-3 shrink-0">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/kubernetes/kubernetes-plain.svg" alt="Kubernetes" width="40" height="40" class="h-10 w-10 object-contain" loading="lazy">
+                            <span class="text-sm font-bold text-slate-600">Kubernetes</span>
+                        </div>
+                        <div class="flex items-center gap-3 shrink-0">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/terraform/terraform-original.svg" alt="Terraform" width="40" height="40" class="h-10 w-10 object-contain" loading="lazy">
+                            <span class="text-sm font-bold text-slate-600">Terraform</span>
+                        </div>
+                        <div class="flex items-center gap-3 shrink-0">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/linux/linux-original.svg" alt="Linux" width="40" height="40" class="h-10 w-10 object-contain" loading="lazy">
+                            <span class="text-sm font-bold text-slate-600">Linux</span>
+                        </div>
+                        <div class="flex items-center gap-3 shrink-0">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/jenkins/jenkins-original.svg" alt="Jenkins" width="40" height="40" class="h-10 w-10 object-contain" loading="lazy">
+                            <span class="text-sm font-bold text-slate-600">Jenkins</span>
+                        </div>
+                        <div class="flex items-center gap-3 shrink-0">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/python/python-original.svg" alt="Python" width="40" height="40" class="h-10 w-10 object-contain" loading="lazy">
+                            <span class="text-sm font-bold text-slate-600">Python</span>
+                        </div>
+                        <div class="flex items-center gap-3 shrink-0">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/mysql/mysql-original.svg" alt="MySQL" width="40" height="40" class="h-10 w-10 object-contain" loading="lazy">
+                            <span class="text-sm font-bold text-slate-600">MySQL</span>
+                        </div>
+                        <div class="flex items-center gap-3 shrink-0">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/git/git-original.svg" alt="Git" width="40" height="40" class="h-10 w-10 object-contain" loading="lazy">
+                            <span class="text-sm font-bold text-slate-600">Git</span>
+                        </div>
+                        <div class="flex items-center gap-3 shrink-0">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/react/react-original.svg" alt="React" width="40" height="40" class="h-10 w-10 object-contain" loading="lazy">
+                            <span class="text-sm font-bold text-slate-600">React</span>
+                        </div>
+                        <div class="flex items-center gap-3 shrink-0">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/nodejs/nodejs-original.svg" alt="Node.js" width="40" height="40" class="h-10 w-10 object-contain" loading="lazy">
+                            <span class="text-sm font-bold text-slate-600">Node.js</span>
+                        </div>
+                        <div class="flex items-center gap-3 shrink-0">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/mongodb/mongodb-original.svg" alt="MongoDB" width="40" height="40" class="h-10 w-10 object-contain" loading="lazy">
+                            <span class="text-sm font-bold text-slate-600">MongoDB</span>
+                        </div>
+                            <div class="marquee-dup flex items-center gap-14" aria-hidden="true">
+                        <div class="flex items-center gap-3 shrink-0" aria-hidden="true">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="" width="40" height="40" class="h-10 w-10 object-contain" loading="lazy">
+                            <span class="text-sm font-bold text-slate-600">AWS</span>
+                        </div>
+                        <div class="flex items-center gap-3 shrink-0" aria-hidden="true">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/docker/docker-original.svg" alt="" width="40" height="40" class="h-10 w-10 object-contain" loading="lazy">
+                            <span class="text-sm font-bold text-slate-600">Docker</span>
+                        </div>
+                        <div class="flex items-center gap-3 shrink-0" aria-hidden="true">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/kubernetes/kubernetes-plain.svg" alt="" width="40" height="40" class="h-10 w-10 object-contain" loading="lazy">
+                            <span class="text-sm font-bold text-slate-600">Kubernetes</span>
+                        </div>
+                        <div class="flex items-center gap-3 shrink-0" aria-hidden="true">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/terraform/terraform-original.svg" alt="" width="40" height="40" class="h-10 w-10 object-contain" loading="lazy">
+                            <span class="text-sm font-bold text-slate-600">Terraform</span>
+                        </div>
+                        <div class="flex items-center gap-3 shrink-0" aria-hidden="true">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/linux/linux-original.svg" alt="" width="40" height="40" class="h-10 w-10 object-contain" loading="lazy">
+                            <span class="text-sm font-bold text-slate-600">Linux</span>
+                        </div>
+                        <div class="flex items-center gap-3 shrink-0" aria-hidden="true">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/jenkins/jenkins-original.svg" alt="" width="40" height="40" class="h-10 w-10 object-contain" loading="lazy">
+                            <span class="text-sm font-bold text-slate-600">Jenkins</span>
+                        </div>
+                        <div class="flex items-center gap-3 shrink-0" aria-hidden="true">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/python/python-original.svg" alt="" width="40" height="40" class="h-10 w-10 object-contain" loading="lazy">
+                            <span class="text-sm font-bold text-slate-600">Python</span>
+                        </div>
+                        <div class="flex items-center gap-3 shrink-0" aria-hidden="true">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/mysql/mysql-original.svg" alt="" width="40" height="40" class="h-10 w-10 object-contain" loading="lazy">
+                            <span class="text-sm font-bold text-slate-600">MySQL</span>
+                        </div>
+                        <div class="flex items-center gap-3 shrink-0" aria-hidden="true">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/git/git-original.svg" alt="" width="40" height="40" class="h-10 w-10 object-contain" loading="lazy">
+                            <span class="text-sm font-bold text-slate-600">Git</span>
+                        </div>
+                        <div class="flex items-center gap-3 shrink-0" aria-hidden="true">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/react/react-original.svg" alt="" width="40" height="40" class="h-10 w-10 object-contain" loading="lazy">
+                            <span class="text-sm font-bold text-slate-600">React</span>
+                        </div>
+                        <div class="flex items-center gap-3 shrink-0" aria-hidden="true">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/nodejs/nodejs-original.svg" alt="" width="40" height="40" class="h-10 w-10 object-contain" loading="lazy">
+                            <span class="text-sm font-bold text-slate-600">Node.js</span>
+                        </div>
+                        <div class="flex items-center gap-3 shrink-0" aria-hidden="true">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/mongodb/mongodb-original.svg" alt="" width="40" height="40" class="h-10 w-10 object-contain" loading="lazy">
+                            <span class="text-sm font-bold text-slate-600">MongoDB</span>
+                        </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <!-- Features Section -->
             <section id="features" class="bg-slate-100/70 py-20 border-y border-slate-200">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -367,6 +522,169 @@
                     </div>
                 </div>
             </section>
+
+            <!-- How It Works / Learning Journey -->
+            <section id="how-it-works" class="hero-gradient text-white py-20">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center max-w-3xl mx-auto mb-14">
+                        <h2 class="text-3xl sm:text-4xl font-black">From beginner to industry-ready in five steps</h2>
+                        <p class="text-purple-200 mt-3 text-sm sm:text-base">The same learning path runs through every Eduvanta program.</p>
+                    </div>
+                    <ol class="journey-line relative grid gap-10 sm:grid-cols-2 lg:grid-cols-5 lg:gap-4">
+                        <li class="relative text-center lg:px-2">
+                            <div class="relative z-10 mx-auto w-14 h-14 rounded-full bg-brand-orange text-white flex items-center justify-center text-xl shadow-lg shadow-orange-500/30 ring-4 ring-brand-purpleDark">
+                                <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
+                            </div>
+                            <div class="mt-4 text-xs font-bold text-orange-300">Step 1</div>
+                            <h3 class="mt-1 text-lg font-extrabold text-white">Foundation</h3>
+                            <p class="mt-2 text-sm text-purple-100/90 leading-relaxed">Linux, networking, SQL, Python and web basics. Strong fundamentals before any advanced tool.</p>
+                        </li>
+                        <li class="relative text-center lg:px-2">
+                            <div class="relative z-10 mx-auto w-14 h-14 rounded-full bg-brand-orange text-white flex items-center justify-center text-xl shadow-lg shadow-orange-500/30 ring-4 ring-brand-purpleDark">
+                                <i class="fa-solid fa-terminal" aria-hidden="true"></i>
+                            </div>
+                            <div class="mt-4 text-xs font-bold text-orange-300">Step 2</div>
+                            <h3 class="mt-1 text-lg font-extrabold text-white">Live labs with mentors</h3>
+                            <p class="mt-2 text-sm text-purple-100/90 leading-relaxed">Mentor-led classes with hands-on AWS, Docker, SQL and React labs, plus weekly 1-on-1 code reviews.</p>
+                        </li>
+                        <li class="relative text-center lg:px-2">
+                            <div class="relative z-10 mx-auto w-14 h-14 rounded-full bg-brand-orange text-white flex items-center justify-center text-xl shadow-lg shadow-orange-500/30 ring-4 ring-brand-purpleDark">
+                                <i class="fa-solid fa-diagram-project" aria-hidden="true"></i>
+                            </div>
+                            <div class="mt-4 text-xs font-bold text-orange-300">Step 3</div>
+                            <h3 class="mt-1 text-lg font-extrabold text-white">Real projects</h3>
+                            <p class="mt-2 text-sm text-purple-100/90 leading-relaxed">Build capstone projects from your syllabus: CI/CD pipelines, BI dashboards or full stack apps.</p>
+                        </li>
+                        <li class="relative text-center lg:px-2">
+                            <div class="relative z-10 mx-auto w-14 h-14 rounded-full bg-brand-orange text-white flex items-center justify-center text-xl shadow-lg shadow-orange-500/30 ring-4 ring-brand-purpleDark">
+                                <i class="fa-solid fa-rocket" aria-hidden="true"></i>
+                            </div>
+                            <div class="mt-4 text-xs font-bold text-orange-300">Step 4</div>
+                            <h3 class="mt-1 text-lg font-extrabold text-white">Deploy and showcase</h3>
+                            <p class="mt-2 text-sm text-purple-100/90 leading-relaxed">Ship your work to the cloud, publish it on GitHub and assemble a portfolio recruiters can open.</p>
+                        </li>
+                        <li class="relative text-center lg:px-2">
+                            <div class="relative z-10 mx-auto w-14 h-14 rounded-full bg-brand-orange text-white flex items-center justify-center text-xl shadow-lg shadow-orange-500/30 ring-4 ring-brand-purpleDark">
+                                <i class="fa-solid fa-briefcase" aria-hidden="true"></i>
+                            </div>
+                            <div class="mt-4 text-xs font-bold text-orange-300">Step 5</div>
+                            <h3 class="mt-1 text-lg font-extrabold text-white">Career support</h3>
+                            <p class="mt-2 text-sm text-purple-100/90 leading-relaxed">Resume review, mock interviews and placement support until you are interview-ready.</p>
+                        </li>
+                    </ol>
+                </div>
+            </section>
+
+            <!-- Success Stories: renders only when successStories[] in the script below has entries -->
+            <section id="stories" class="hidden py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <h2 class="text-3xl sm:text-4xl font-black text-slate-900">Student success stories</h2>
+                    <p class="text-slate-600 mt-3 text-sm sm:text-base">Real learners, real career moves.</p>
+                </div>
+                <div id="stories-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+            </section>
+
+            <!-- FAQ -->
+            <section id="faq" class="py-20 bg-slate-100/70 border-y border-slate-200">
+                <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-10">
+                        <h2 class="text-3xl sm:text-4xl font-black text-slate-900">Questions students ask us</h2>
+                        <p class="text-slate-600 mt-3 text-sm sm:text-base">Can't find your answer? Call or message our admissions team.</p>
+                    </div>
+                    <div class="space-y-3">
+                    <details class="faq group bg-white rounded-2xl border border-slate-200 shadow-sm open:border-brand-purple/40 open:shadow-md transition-shadow">
+                        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-6 py-5 text-left">
+                            <span class="font-bold text-slate-900 text-sm sm:text-base">Do I need prior experience to join?</span>
+                            <span class="faq-icon shrink-0 w-8 h-8 rounded-full bg-purple-50 text-brand-purple flex items-center justify-center transition-transform duration-200"><i class="fa-solid fa-plus text-xs" aria-hidden="true"></i></span>
+                        </summary>
+                        <p class="px-6 pb-5 -mt-1 text-sm text-slate-600 leading-relaxed max-w-3xl">Each program starts with fundamentals. Tell our counselor about your background and they will suggest the right track and starting point for you.</p>
+                    </details>
+                    <details class="faq group bg-white rounded-2xl border border-slate-200 shadow-sm open:border-brand-purple/40 open:shadow-md transition-shadow">
+                        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-6 py-5 text-left">
+                            <span class="font-bold text-slate-900 text-sm sm:text-base">How are the classes conducted?</span>
+                            <span class="faq-icon shrink-0 w-8 h-8 rounded-full bg-purple-50 text-brand-purple flex items-center justify-center transition-transform duration-200"><i class="fa-solid fa-plus text-xs" aria-hidden="true"></i></span>
+                        </summary>
+                        <p class="px-6 pb-5 -mt-1 text-sm text-slate-600 leading-relaxed max-w-3xl">Classes are live and mentor-led, with hands-on lab practice. If you miss a session, you get lifetime access to the full HD recording and the instructor code repositories.</p>
+                    </details>
+                    <details class="faq group bg-white rounded-2xl border border-slate-200 shadow-sm open:border-brand-purple/40 open:shadow-md transition-shadow">
+                        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-6 py-5 text-left">
+                            <span class="font-bold text-slate-900 text-sm sm:text-base">Will I get a certificate?</span>
+                            <span class="faq-icon shrink-0 w-8 h-8 rounded-full bg-purple-50 text-brand-purple flex items-center justify-center transition-transform duration-200"><i class="fa-solid fa-plus text-xs" aria-hidden="true"></i></span>
+                        </summary>
+                        <p class="px-6 pb-5 -mt-1 text-sm text-slate-600 leading-relaxed max-w-3xl">Yes. You receive a verifiable Eduvanta completion certificate that you can share on LinkedIn and add to your resume.</p>
+                    </details>
+                    <details class="faq group bg-white rounded-2xl border border-slate-200 shadow-sm open:border-brand-purple/40 open:shadow-md transition-shadow">
+                        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-6 py-5 text-left">
+                            <span class="font-bold text-slate-900 text-sm sm:text-base">What does placement support include?</span>
+                            <span class="faq-icon shrink-0 w-8 h-8 rounded-full bg-purple-50 text-brand-purple flex items-center justify-center transition-transform duration-200"><i class="fa-solid fa-plus text-xs" aria-hidden="true"></i></span>
+                        </summary>
+                        <p class="px-6 pb-5 -mt-1 text-sm text-slate-600 leading-relaxed max-w-3xl">Resume review, mock interviews, portfolio and GitHub guidance, and interview preparation with our mentors.</p>
+                    </details>
+                    <details class="faq group bg-white rounded-2xl border border-slate-200 shadow-sm open:border-brand-purple/40 open:shadow-md transition-shadow">
+                        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-6 py-5 text-left">
+                            <span class="font-bold text-slate-900 text-sm sm:text-base">Can I see the syllabus before I enroll?</span>
+                            <span class="faq-icon shrink-0 w-8 h-8 rounded-full bg-purple-50 text-brand-purple flex items-center justify-center transition-transform duration-200"><i class="fa-solid fa-plus text-xs" aria-hidden="true"></i></span>
+                        </summary>
+                        <p class="px-6 pb-5 -mt-1 text-sm text-slate-600 leading-relaxed max-w-3xl">Yes. Use the Syllabus button in the top bar, or open any course page, to preview the modules and download the PDF.</p>
+                    </details>
+                    <details class="faq group bg-white rounded-2xl border border-slate-200 shadow-sm open:border-brand-purple/40 open:shadow-md transition-shadow">
+                        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-6 py-5 text-left">
+                            <span class="font-bold text-slate-900 text-sm sm:text-base">How do I enroll, and what are the fees?</span>
+                            <span class="faq-icon shrink-0 w-8 h-8 rounded-full bg-purple-50 text-brand-purple flex items-center justify-center transition-transform duration-200"><i class="fa-solid fa-plus text-xs" aria-hidden="true"></i></span>
+                        </summary>
+                        <p class="px-6 pb-5 -mt-1 text-sm text-slate-600 leading-relaxed max-w-3xl">Fill in the admission form or book a free career session. Our counselor will share current fees, batch dates and payment options for your chosen program.</p>
+                    </details>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Free Career Session -->
+            <section id="career-session" class="hero-pattern text-white py-20 relative overflow-hidden">
+                <div class="absolute -right-24 -top-24 w-80 h-80 rounded-full border-4 border-brand-orange/30"></div>
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-5">
+                        <h2 class="text-3xl sm:text-4xl font-black leading-tight">Not sure which track fits you? Book a free career session.</h2>
+                        <p class="text-purple-100 max-w-xl leading-relaxed">Talk to a senior counselor about your background and goals. You will leave with a clear plan for the right program, batch and next steps.</p>
+                        <ul class="space-y-2 text-sm text-purple-100">
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-brand-orange" aria-hidden="true"></i> Personalised track recommendation</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-brand-orange" aria-hidden="true"></i> Syllabus walkthrough and Q&A</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-brand-orange" aria-hidden="true"></i> Fees, batch dates and payment options</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white text-slate-800 rounded-3xl p-8 shadow-2xl">
+                        <div id="career-form-wrap">
+                            <h3 class="text-xl font-black text-slate-900">Reserve your free session</h3>
+                            <p class="text-xs text-slate-500 mt-1 mb-5">We will call you to confirm a time.</p>
+                            <form onsubmit="handleCareerSession(event)" class="space-y-4">
+                                <div>
+                                    <label for="cs-name" class="block text-[11px] font-bold uppercase text-slate-700 mb-1">Full name</label>
+                                    <input id="cs-name" type="text" required autocomplete="name" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-brand-purple">
+                                </div>
+                                <div>
+                                    <label for="cs-phone" class="block text-[11px] font-bold uppercase text-slate-700 mb-1">Phone number</label>
+                                    <input id="cs-phone" type="tel" required autocomplete="tel" placeholder="+91 98765 43210" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-brand-purple">
+                                </div>
+                                <div>
+                                    <label for="cs-course" class="block text-[11px] font-bold uppercase text-slate-700 mb-1">Program you are interested in</label>
+                                    <select id="cs-course" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm bg-white focus:outline-none focus:border-brand-purple">
+                                        <option>Cloud Computing &amp; DevOps</option>
+                                        <option>Data Analytics &amp; BI</option>
+                                        <option>Full Stack Web Development</option>
+                                        <option>Not sure yet</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="w-full bg-brand-orange hover:bg-brand-orangeHover text-white py-3 rounded-xl font-bold text-sm shadow-lg shadow-orange-500/20 transition-colors">Book my free session</button>
+                            </form>
+                        </div>
+                        <div id="career-form-done" class="hidden text-center py-8" role="status" aria-live="polite">
+                            <div class="mx-auto w-14 h-14 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-2xl"><i class="fa-solid fa-check" aria-hidden="true"></i></div>
+                            <h3 class="text-xl font-black text-slate-900 mt-4">You're on the list</h3>
+                            <p class="text-sm text-slate-600 mt-2">Our counselor will call you to confirm your session time.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
 
         <!-- ================= PAGE 1: CLOUD COMPUTING DETAILED VIEW ================= -->
@@ -374,8 +692,8 @@
             <!-- Course Hero -->
             <section class="hero-gradient text-white py-16">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
-                        <div class="space-y-4 max-w-3xl">
+                    <div class="grid lg:grid-cols-12 gap-x-10 gap-y-6 items-center">
+                        <div class="lg:col-span-7 lg:row-start-1 space-y-4">
                             <div class="flex flex-wrap items-center gap-2">
                                 <span class="bg-brand-orange text-white text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider">
                                     16-Week Flagship
@@ -389,13 +707,19 @@
                                 Architect, automate, and manage scalable enterprise cloud infrastructure. Master AWS, Docker containers, Kubernetes clusters, Terraform IaC, and CI/CD pipelines.
                             </p>
                         </div>
-                        <div class="flex flex-col sm:flex-row lg:flex-col gap-3 min-w-[220px]">
+                        <div class="lg:col-span-7 lg:row-start-2 flex flex-col sm:flex-row gap-3">
                             <button onclick="openSyllabusModal('cloud')" class="bg-white text-brand-purple hover:bg-purple-50 px-5 py-3 rounded-xl font-extrabold text-sm shadow transition-all flex items-center justify-center gap-2">
                                 <i class="fa-solid fa-file-pdf text-red-500"></i> Download Syllabus PDF
                             </button>
                             <button onclick="openEnrollModal('Cloud Computing & DevOps')" class="bg-brand-orange hover:bg-brand-orangeHover text-white px-5 py-3 rounded-xl font-extrabold text-sm shadow transition-all flex items-center justify-center gap-2">
                                 Enroll In Cloud Program
                             </button>
+                        </div>
+                        <div class="lg:col-span-5 lg:col-start-8 lg:row-start-1 lg:row-span-2">
+                            <div class="relative">
+                                <div class="absolute -inset-3 rounded-[2rem] bg-brand-orange/20 blur-2xl"></div>
+                                <img src="assets/devops.png" alt="Cloud Computing and DevOps course" class="relative w-full h-56 sm:h-72 lg:h-80 object-cover rounded-3xl border border-white/15 shadow-2xl" loading="eager">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -519,8 +843,8 @@
             <!-- Course Hero -->
             <section class="hero-gradient text-white py-16">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
-                        <div class="space-y-4 max-w-3xl">
+                    <div class="grid lg:grid-cols-12 gap-x-10 gap-y-6 items-center">
+                        <div class="lg:col-span-7 lg:row-start-1 space-y-4">
                             <div class="flex flex-wrap items-center gap-2">
                                 <span class="bg-brand-orange text-white text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider">
                                     12-Week Industry Program
@@ -534,13 +858,19 @@
                                 Turn complex raw datasets into executive decision intelligence. Master SQL queries, Python data analysis (Pandas & NumPy), interactive Power BI dashboards, and Tableau storyboards.
                             </p>
                         </div>
-                        <div class="flex flex-col sm:flex-row lg:flex-col gap-3 min-w-[220px]">
+                        <div class="lg:col-span-7 lg:row-start-2 flex flex-col sm:flex-row gap-3">
                             <button onclick="openSyllabusModal('data')" class="bg-white text-brand-purple hover:bg-purple-50 px-5 py-3 rounded-xl font-extrabold text-sm shadow transition-all flex items-center justify-center gap-2">
                                 <i class="fa-solid fa-file-pdf text-red-500"></i> Download Syllabus PDF
                             </button>
                             <button onclick="openEnrollModal('Data Analytics & BI')" class="bg-brand-orange hover:bg-brand-orangeHover text-white px-5 py-3 rounded-xl font-extrabold text-sm shadow transition-all flex items-center justify-center gap-2">
                                 Enroll In Data Program
                             </button>
+                        </div>
+                        <div class="lg:col-span-5 lg:col-start-8 lg:row-start-1 lg:row-span-2">
+                            <div class="relative">
+                                <div class="absolute -inset-3 rounded-[2rem] bg-brand-orange/20 blur-2xl"></div>
+                                <img src="assets/Data-Analyst.png" alt="Data Analytics and Business Intelligence course" class="relative w-full h-56 sm:h-72 lg:h-80 object-cover rounded-3xl border border-white/15 shadow-2xl" loading="eager">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -663,8 +993,8 @@
             <!-- Course Hero -->
             <section class="hero-gradient text-white py-16">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
-                        <div class="space-y-4 max-w-3xl">
+                    <div class="grid lg:grid-cols-12 gap-x-10 gap-y-6 items-center">
+                        <div class="lg:col-span-7 lg:row-start-1 space-y-4">
                             <div class="flex flex-wrap items-center gap-2">
                                 <span class="bg-brand-orange text-white text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider">
                                     20-Week Career Track
@@ -678,13 +1008,19 @@
                                 Build complete web software applications from client UI to cloud database setup. Learn HTML5, Tailwind CSS, JavaScript ES6+, React.js, Node.js, Express, MongoDB, and Redux.
                             </p>
                         </div>
-                        <div class="flex flex-col sm:flex-row lg:flex-col gap-3 min-w-[220px]">
+                        <div class="lg:col-span-7 lg:row-start-2 flex flex-col sm:flex-row gap-3">
                             <button onclick="openSyllabusModal('web')" class="bg-white text-brand-purple hover:bg-purple-50 px-5 py-3 rounded-xl font-extrabold text-sm shadow transition-all flex items-center justify-center gap-2">
                                 <i class="fa-solid fa-file-pdf text-red-500"></i> Download Syllabus PDF
                             </button>
                             <button onclick="openEnrollModal('Full Stack Web Development')" class="bg-brand-orange hover:bg-brand-orangeHover text-white px-5 py-3 rounded-xl font-extrabold text-sm shadow transition-all flex items-center justify-center gap-2">
                                 Enroll In Web Track
                             </button>
+                        </div>
+                        <div class="lg:col-span-5 lg:col-start-8 lg:row-start-1 lg:row-span-2">
+                            <div class="relative">
+                                <div class="absolute -inset-3 rounded-[2rem] bg-brand-orange/20 blur-2xl"></div>
+                                <img src="assets/full-stack-devlopment.png" alt="Full Stack Web Development course" class="relative w-full h-56 sm:h-72 lg:h-80 object-cover rounded-3xl border border-white/15 shadow-2xl" loading="eager">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -825,7 +1161,7 @@
                         <li><button onclick="navigateTo('data')" class="hover:text-brand-orange">Data Analytics</button></li>
                         <li><button onclick="navigateTo('web')" class="hover:text-brand-orange">Web Development</button></li>
                         <li><a href="./privacy.html" class="hover:text-brand-orange">Privacy Policy</a></li>
-                        <li><a href="./terms.html" class="hover:text-brand-orange">Terms & Condtions </a></li>
+                        <li><a href="./terms.html" class="hover:text-brand-orange">Terms & Conditions</a></li>
                     </ul>
                 </div>
 
@@ -925,6 +1261,16 @@
                 </button>
             </div>
         </div>
+    </div>
+
+    <!-- FLOATING CONTACT BUTTONS -->
+    <div class="fixed bottom-5 right-4 sm:right-6 z-40 flex flex-col gap-3">
+        <a href="tel:+919125092165" aria-label="Call Eduvanta admissions" class="float-btn w-12 h-12 rounded-full bg-brand-purple hover:bg-brand-purpleLight text-white flex items-center justify-center text-lg transition-colors">
+            <i class="fa-solid fa-phone" aria-hidden="true"></i>
+        </a>
+        <a href="https://wa.me/919125092165?text=Hi%20Eduvanta%2C%20I%20want%20to%20know%20more%20about%20your%20courses." target="_blank" rel="noopener" aria-label="Chat with Eduvanta on WhatsApp" class="float-btn w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#1ebe5a] text-white flex items-center justify-center text-3xl transition-colors">
+            <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+        </a>
     </div>
 
     <!-- JAVASCRIPT APP ROUTING & PDF GENERATOR -->
@@ -1131,6 +1477,53 @@
 
             doc.save(`Eduvanta_${courseKey}_Syllabus.pdf`);
         }
+
+        // ===== Success stories (add real students here; section stays hidden while this list is empty) =====
+        // Example: { name: "Student Name", role: "Cloud Engineer", company: "Company", quote: "Short real quote.", photo: "assets/student1.jpg" }
+        const successStories = [];
+
+        function renderStories() {
+            if (!successStories.length) return;
+            const grid = document.getElementById('stories-grid');
+            grid.innerHTML = successStories.map(st => `
+                <figure class="bg-white rounded-3xl border border-slate-200/80 p-8 shadow-sm flex flex-col">
+                    <blockquote class="text-sm text-slate-700 leading-relaxed flex-grow">${st.quote}</blockquote>
+                    <figcaption class="mt-6 flex items-center gap-4">
+                        ${st.photo ? `<img src="${st.photo}" alt="${st.name}" class="w-12 h-12 rounded-full object-cover" loading="lazy">` : `<div class="w-12 h-12 rounded-full bg-purple-100 text-brand-purple flex items-center justify-center font-black">${st.name.charAt(0)}</div>`}
+                        <div>
+                            <div class="font-bold text-slate-900 text-sm">${st.name}</div>
+                            <div class="text-xs text-slate-500">${st.role}${st.company ? ' at <span class="font-semibold text-brand-purple">' + st.company + '</span>' : ''}</div>
+                        </div>
+                    </figcaption>
+                </figure>`).join('');
+            document.getElementById('stories').classList.remove('hidden');
+        }
+
+        // ===== Hero metric count-up (runs once, skipped for reduced motion) =====
+        function runCountUp() {
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            document.querySelectorAll('.count-up').forEach(el => {
+                const target = parseFloat(el.dataset.target);
+                const dec = parseInt(el.dataset.decimals || '0', 10);
+                const suffix = el.dataset.suffix || '';
+                const start = performance.now(), dur = 1400;
+                (function tick(now) {
+                    const t = Math.min((now - start) / dur, 1);
+                    const eased = 1 - Math.pow(1 - t, 3);
+                    el.textContent = (target * eased).toFixed(dec) + suffix;
+                    if (t < 1) requestAnimationFrame(tick);
+                })(start);
+            });
+        }
+
+        // ===== Free career session form =====
+        function handleCareerSession(e) {
+            e.preventDefault();
+            document.getElementById('career-form-wrap').classList.add('hidden');
+            document.getElementById('career-form-done').classList.remove('hidden');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => { renderStories(); runCountUp(); });
     </script>
 </body>
 </html>
